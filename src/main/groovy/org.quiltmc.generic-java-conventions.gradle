@@ -1,0 +1,28 @@
+/*
+ * A set of generic java conventions that will be needed in every single project.
+ * This is essentially just the java snippets from the fabric-example-mod and is safe to use in any project.
+ */
+
+
+plugins {
+    id 'java'
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release.set(8)
+    }
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
+}
