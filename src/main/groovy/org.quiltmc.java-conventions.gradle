@@ -6,8 +6,6 @@ plugins {
     id 'com.diffplug.spotless'
 }
 
-def beforePattern = Pattern.compile("(?<=\\n)([\\t]+)([^\\/\\r\\n \\t][^\\r\\n]*|\\/[^\\/\\r\\n][^\\r\\n]*|[^\\/\\r\\n][^\\r\\n]*(\\r?\\n\\1\\/\\/[^\\r\\n]*)+)\\r?\\n\\1(|(if|do|while|for|try)[^\\r\\n]+)\\{[\\t ]*\\r?\\n")
-def afterPattern = Pattern.compile("(?<=\\n)([\\t]+)(\\})\\r?\\n\\1(?:[^\\r\\n\\}cd]|c[^\\r\\na]|ca[^\\r\\ns]|d[^\\r\\ne]|de[^\\r\\nf])")
 spotless {
     java {
         eclipse().configFile("codeformat/eclipse.xml")
