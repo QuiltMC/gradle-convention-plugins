@@ -1,0 +1,56 @@
+plugins {
+    id 'groovy-gradle-plugin'
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'org.quiltmc.gradle-conventions'
+def MAJOR = "0"
+def ENV = System.getenv()
+if (ENV.GITHUB_RUN_NUMBER) {
+    version = MAJOR + "." + ENV.GITHUB_RUN_NUMBER
+} else {
+    version = MAJOR + "-SNAPSHOT"
+}
+
+publishing {
+    repositories {
+        if (ENV.MAVEN_URL) {
+            url ENV.MAVEN_URL
+            credentials {
+                username ENV.MAVEN_USERNAME
+                password EVN.MAVEN_PASSWORD
+            }
+        } else {
+            mavenLocal()
+        }
+    }
+}
+repositories {
+    maven {
+        url "https://maven.quiltmc.org/repository/release"
+    }
+    gradlePluginPortal()
+    mavenCentral()
+    maven {
+        name = 'ajoberstar-backup'
+        url = 'https://ajoberstar.org/bintray-backup/'
+    }
+}
+
+dependencies {
+    implementation "com.diffplug.spotless:spotless-plugin-gradle:5.12.4"
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release.set(8)
+    }
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

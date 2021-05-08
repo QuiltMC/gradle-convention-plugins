@@ -1,0 +1,22 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+plugins {
+    id 'com.diffplug.spotless'
+}
+
+spotless {
+    java {
+        eclipse().configFile(rootProject.file("codeformat/eclipse.xml"))
+        licenseHeaderFile(rootProject.file("codeformat/HEADER")).yearSeparator(", ")
+        addStep(org.quiltmc.gradleconventionplugins.BraceSpacingStep.create())
+    }
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${rootProject.archivesBaseName}" }
+    }
+}
+
+// TODO: checkstyle

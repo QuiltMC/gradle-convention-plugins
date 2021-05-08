@@ -21,8 +21,3 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
