@@ -16,10 +16,12 @@ if (ENV.GITHUB_RUN_NUMBER) {
 publishing {
     repositories {
         if (ENV.MAVEN_URL) {
-            url ENV.MAVEN_URL
-            credentials {
-                username ENV.MAVEN_USERNAME
-                password EVN.MAVEN_PASSWORD
+            maven {
+                url ENV.MAVEN_URL
+                credentials {
+                    username ENV.MAVEN_USERNAME
+                    password EVN.MAVEN_PASSWORD
+                }
             }
         } else {
             mavenLocal()
@@ -27,12 +29,8 @@ publishing {
     }
 }
 repositories {
-    maven {
-        url "https://maven.quiltmc.org/repository/release"
-    }
     gradlePluginPortal()
     mavenCentral()
-
 }
 
 dependencies {
