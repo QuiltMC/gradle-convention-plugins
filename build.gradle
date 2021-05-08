@@ -32,10 +32,7 @@ repositories {
     }
     gradlePluginPortal()
     mavenCentral()
-    maven {
-        name = 'ajoberstar-backup'
-        url = 'https://ajoberstar.org/bintray-backup/'
-    }
+
 }
 
 dependencies {
