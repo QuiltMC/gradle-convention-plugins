@@ -20,7 +20,7 @@ publishing {
                 url ENV.MAVEN_URL
                 credentials {
                     username ENV.MAVEN_USERNAME
-                    password EVN.MAVEN_PASSWORD
+                    password ENV.MAVEN_PASSWORD
                 }
             }
         } else {
